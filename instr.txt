@@ -1,0 +1,5 @@
+устанавливает poetry: pip install poetry
+после установки файл requirements.txt можно удалить
+создание нового проекта: poetry new или poetry new название
+если проект уже есть то инициализим его: poetry init 
+вводим название проекта
