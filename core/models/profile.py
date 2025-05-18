@@ -2,19 +2,19 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy import String
 from .base import Base
+from .mixins import UserRelationMixin
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-if TYPE_CHECKING:
-    from .post import Post
-    from .profile import Profile
+
 # объявление модели для создания таблицы
-class User(Base):
+class Profile(UserRelationMixin, Base):
 
     #__tablename__ = 'products'
 
     # при помощи Mapped указываем что, это будут названия колонок таблицы
-    username: Mapped[str] = mapped_column(String(32),unique=True)
-
-    posts: Mapped[list['Post']] = relationship(back_populates='user')
-    profile: Mapped['Profile'] = relationship(back_populates='user')
+    _user_id_unique = True
+    _user_back_populates = 'profile'
+    first_name: Mapped[str | None] = mapped_column(String(40),unique=False)
+    last_name: Mapped[str | None] = mapped_column(String(40),unique=False)
+    bio: Mapped[str | None]
 
